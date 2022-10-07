@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simulação da gravidade</title>
+        <style>
+            div {
+                display: flex;
+                justify-content: center;
+            }
+            canvas {
+                image-rendering: pixelated;
+                width: 50%;
+                border-radius: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Simulação da gravidade</h3>
+        <div>
+            <canvas id="tela"></canvas>
+        </div>
+
+        <p></p>
+        <script>
+            "use strict"
+            const tela = document.getElementById("tela");
+            const ctx = tela.getContext("2d");
+
+            let mundo = {
+                width: 2000,
+                height: 2000,
+
+                background: "#180a3d",
+
+                g: 9.8 / 10,
+                
+                colisao: false
+
+                // astros
+            };
+            let sol = {
+                tamanho: 200,
+                massa: 1000,
+                
+                x: mundo.width / 2,
+                y: mundo.height / 2,
+                xCartesiano: 0,
+                yCartesiano: 0,
+
+                cor: "#e6c430",
+            };
+            let planeta = {
+                tamanho: 70,
+                massa: 50,
+                
+                x: 0,
+                y: 0,
+                xCartesiano: 0,
+                yCartesiano: -400,
+                
+                aceleracaoX: 0,
+                aceleracaoY: 0,
+
+                velocidadeX: 15,
+                velocidadeY: 0,
+                
+                distancia: 0,
+
+                cor: "#306ae6",
+
+                forcaG: 0,
+                forcaGX: 0,
+                forcaGY: 0,
+            };
+            let lua = {
+                tamanho: 30,
+                massa: 50,
+                
+                x: 0,
+                y: 0,
+                xCartesiano: -200,
+                yCartesiano: -600,
+
+                aceleracaoX: 0,
+                aceleracaoY: 0,
+
+                velocidadeX: 0,
+                velocidadeY: 0,
+
+                distancia: 0,
+
+                forcaG: 0,
+                forcaGX: 0,
+                forcaGY: 0,
+
+                cor: "#c9c9c9"
+            };
+
+            tela.width = mundo.width;
+            tela.height = mundo.height;
+            
+            function render() {
+                // renderiza o fundo
+                ctx.globalAlpha = 0.1;
+                ctx.fillStyle = mundo.background;
+                ctx.fillRect(0, 0, mundo.width, mundo.height);
+
+                ctx.globalAlpha = 1;
+                // renderiza o planeta
+                ctx.fillStyle = planeta.cor;
+                ctx.beginPath();
+                ctx.arc(planeta.x, planeta.y, planeta.tamanho / 2, 0, Math.PI * 2, true);
+                ctx.fill();
+                
+                // renderiza a lua
+                ctx.fillStyle = lua.cor;
+                ctx.beginPath();
+                ctx.arc(lua.x, lua.y, lua.tamanho / 2, 0, Math.PI * 2, true);
+                ctx.fill();
+
+                // renderiza o sol
+                ctx.fillStyle = sol.cor;
+                ctx.beginPath();
+                ctx.arc(sol.x, sol.y, sol.tamanho / 2, 0, Math.PI * 2, true);
+                ctx.fill();
+                
+
+
+                requestAnimationFrame(render);
+            };
+            render();
+
+        function logica() {
+
+            // Criando um plano cartesiano para o planeta
+            if (planeta.xCartesiano < mundo.width / 2) {
+                planeta.x = (mundo.width / 2) + planeta.xCartesiano;
+            }
+            else if (planeta.xCartesiano > mundo.width) {
+                    planeta.x = (mundo.width / 2) - planeta.xCartesiano;
+                };
+            if (planeta.yCartesiano < mundo.height / 2) {
+                planeta.y = (mundo.height / 2) + planeta.yCartesiano;
+            }
+            else if (planeta.yCartesiano > mundo.height / 2) {
+                planeta.y = (mundo.height / 2) - planeta.yCartesiano;
+            };
+
+            // Criando um plano cartesiano para a lua
+            if (lua.xCartesiano < mundo.width / 2) {
+                lua.x = (mundo.width / 2) + lua.xCartesiano;
+            }
+            else if (lua.xCartesiano > mundo.width) {
+                lua.x = (mundo.width / 2) - lua.xCartesiano;
+            };
+            if (lua.yCartesiano < mundo.height / 2) {
+                lua.y = (mundo.height / 2) + lua.yCartesiano;
+            }
+            else if (lua.yCartesiano > mundo.height / 2) {
+                lua.y = (mundo.height / 2) - lua.yCartesiano;
+            };
+
+            // plano cartesiano do sol
+            if (sol.xCartesiano < mundo.width / 2) {
+                sol.x = (mundo.width / 2) + sol.xCartesiano;
+            }
+            else if (sol.xCartesiano > mundo.width) {
+                    sol.x = (mundo.width / 2) - sol.xCartesiano;
+            };
+            if (sol.yCartesiano < mundo.height) {
+                sol.y = (mundo.height / 2) + sol.yCartesiano;
+            }
+            else if (planeta.yCartesiano > mundo.height) {
+                sol.y = (mundo.height / 2) - sol.yCartesiano;
+            };
+
+            // gravidade do planeta
+            planeta.distancia = Math.sqrt(Math.pow(sol.xCartesiano - planeta.xCartesiano, 2) + Math.pow(sol.yCartesiano - planeta.yCartesiano, 2));
+            planeta.forcaG = ((sol.massa * planeta.massa) / (Math.pow(planeta.distancia, 2))) * mundo.g;
+
+            // setando as posições do planeta
+            planeta.forcaGX = (planeta.forcaG * (sol.xCartesiano - planeta.xCartesiano)) / 300;
+            planeta.forcaGY = (planeta.forcaG * (sol.yCartesiano - planeta.yCartesiano)) / 300;
+            planeta.aceleracaoX = planeta.forcaGX;
+            planeta.aceleracaoY = planeta.forcaGY;
+
+            planeta.velocidadeX += planeta.aceleracaoX;
+            planeta.velocidadeY += planeta.aceleracaoY;
+
+            if (planeta.distancia <= ((planeta.tamanho / 2) + planeta.tamanho / 2 + sol.tamanho / 2)) {
+                planeta.cor = "red";
+            }
+            else {
+                planeta.cor = "#306ae6";
+            };
+
+            planeta.xCartesiano += planeta.velocidadeX;
+            planeta.yCartesiano += planeta.velocidadeY;
+            
+            // gravidade da lua
+            lua.distancia = Math.sqrt(Math.pow(planeta.xCartesiano - lua.xCartesiano, 2) + Math.pow(planeta.yCartesiano - lua.yCartesiano, 2));
+            lua.forcaG = ((planeta.massa * lua.massa) / (Math.pow(lua.distancia, 2))) * mundo.g;
+
+            // setando as posições da lua
+
+            lua.forcaGX = (lua.forcaG * (planeta.xCartesiano - lua.xCartesiano)) / 50;
+            lua.forcaGY = (lua.forcaG * (planeta.yCartesiano - lua.yCartesiano)) / 50;
+            lua.aceleracaoX = lua.forcaGX;
+            lua.aceleracaoY = lua.forcaGY;
+
+            lua.velocidadeX += lua.aceleracaoX;
+            lua.velocidadeY += lua.aceleracaoY;
+
+            if (lua.distancia <= ((lua.tamanho / 2) + lua.tamanho / 2 + planeta.tamanho / 2)) {
+                lua.aceleracaoX *= -5;
+                lua.aceleracaoY *= -5;
+                lua.velocidadeX *= -5;
+                lua.velocidadeY *= -5;
+            };
+
+            lua.xCartesiano += lua.velocidadeX;
+            lua.yCartesiano += lua.velocidadeY;
+
+            requestAnimationFrame(logica);
+        };
+        logica();
+        </script>
+    </body>
+</html>
