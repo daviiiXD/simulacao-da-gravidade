@@ -7,7 +7,7 @@ let mundo = {
     width: 2700,
     height: 2000,
 
-    background: "#050012",
+    background: "#44475a",
     g: 9.8 / 10,
     colisao: false,
 };
@@ -21,7 +21,7 @@ let jupiter = {
     aceleracaoX: 0,
     aceleracaoY: 0,
 
-    velocidadeX: 25,
+    velocidadeX: 40,
     velocidadeY: 0,   
 
     cor: "purple",
@@ -36,7 +36,7 @@ let marte = {
     aceleracaoX: 0,
     aceleracaoY: 0,
 
-    velocidadeX: 15,
+    velocidadeX: 40,
     velocidadeY: 0,   
 
     cor: "#eb4034",
@@ -51,7 +51,7 @@ let terra = {
     aceleracaoX: 0,
     aceleracaoY: 0,
 
-    velocidadeX: 11,
+    velocidadeX: 30,
     velocidadeY: 0,    
 
     cor: "#306ae6",
@@ -66,7 +66,7 @@ let venus = {
     aceleracaoX: 0,
     aceleracaoY: 0,
 
-    velocidadeX: 10,
+    velocidadeX: 25,
     velocidadeY: 0,
 
     cor: "#c9c9c9"
@@ -81,7 +81,7 @@ let mercurio = {
     aceleracaoX: 0,
     aceleracaoY: 0,
 
-    velocidadeX: 5,
+    velocidadeX: 15,
     velocidadeY: 0,
 
     cor: "#d6d187"
@@ -92,9 +92,6 @@ let sol = {
     
     x: mundo.width / 2,
     y: mundo.height / 2,
-    
-    xCartesiano: 0,
-    yCartesiano: 0,
 
     aceleracaoX: 0,
     aceleracaoY: 0,
@@ -105,4 +102,79 @@ let sol = {
     forcaG: 0,
     
     cor: "#e6c430",
+};
+let planetaA = {
+    tamanho: 200,
+    massa: 100,
+    
+    x: mundo.width / 2 - 1000,
+    y: mundo.height / 2,
+
+    aceleracaoX: 0,
+    aceleracaoY: 0,
+
+    velocidadeX: 0,
+    velocidadeY: 0,
+
+    cor: "#8be9fd"
+};
+let planetaB = {
+    tamanho: 200,
+    massa: 100,
+    
+    x: mundo.width / 2 + 1000,
+    y: mundo.height / 2,
+
+    aceleracaoX: 0,
+    aceleracaoY: 0,
+
+    velocidadeX: 0,
+    velocidadeY: 0,
+
+    cor: "#50fa7b"
+};
+let astrosA = {
+    tamanho: 200,
+    massa: -3000,
+    
+    x: mundo.width / 2,
+    y: mundo.height / 2,
+
+    aceleracaoX: 0,
+    aceleracaoY: 0,
+
+    velocidadeX: 0,
+    velocidadeY: 0,
+
+    cor: "#f1fa8c"
+};
+let astrosB = {
+    tamanho: 100,
+    massa: 100,
+    
+    x: mundo.width / 2 - 10,
+    y: mundo.height / 2 - 500,
+
+    aceleracaoX: 0,
+    aceleracaoY: 0,
+
+    velocidadeX: -5,
+    velocidadeY: 0,
+
+    cor: "#ffb86c"
+};
+let astrosC = {
+    tamanho: 100,
+    massa: 100,
+    
+    x: mundo.width / 2 + 100,
+    y: mundo.height / 2 + 200,
+
+    aceleracaoX: 0,
+    aceleracaoY: 0,
+
+    velocidadeX: 5,
+    velocidadeY: 0,
+
+    cor: "#ff79c6"
 };

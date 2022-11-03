@@ -1,7 +1,7 @@
 "use strict";
 
-tela.width = mundo.width;
-tela.height = mundo.height;
+tela.width = mundo.width + 1000;
+tela.height = mundo.height + 1000;
 
 function render() {
 
@@ -9,69 +9,34 @@ function render() {
     ctx.fillStyle = mundo.background;
     ctx.fillRect(0, 0, mundo.width, mundo.height);
 
-    renderizar(sol);
-    renderizar(terra);
-    renderizar(marte);
-    renderizar(venus);
-    renderizar(mercurio);
+    renderizar(astrosC);
+    renderizar(astrosB);
+    renderizar(astrosA);
 
     requestAnimationFrame(render);
 };
 render();
 
-gerarPosicoes(jupiter)
-gerarPosicoes(marte);
-gerarPosicoes(terra);
-gerarPosicoes(venus);
-gerarPosicoes(mercurio);
-
 function logica() {
     while(true) {
         
-        gravidade(venus, terra);
-        gravidade(venus, marte);
-        gravidade(venus, sol);
-        gravidade(venus, mercurio);
+        gravidade(astrosA, astrosB);
+        gravidade(astrosA, astrosC);
 
-        gravidade(terra, venus);
-        gravidade(terra, marte);
-        gravidade(terra, sol);
-        gravidade(terra, mercurio);
+        gravidade(astrosB, astrosA);
+        gravidade(astrosB, astrosC);
 
-        gravidade(sol, terra);
-        gravidade(sol, venus);
-        gravidade(sol, marte);
-        gravidade(sol, mercurio);
+        gravidade(astrosC, astrosA);
+        gravidade(astrosC, astrosB);
 
-        gravidade(marte, venus);
-        gravidade(marte, terra);
-        gravidade(marte, sol);
-        gravidade(marte, mercurio);
-
-        gravidade(mercurio, terra);
-        gravidade(mercurio, marte);
-        gravidade(mercurio, venus);
-        gravidade(mercurio, sol);
-
-        colisaoBorda(terra);
-        colisaoBorda(sol);
-        colisaoBorda(marte);
-        colisaoBorda(venus);
-        colisaoBorda(mercurio);
+        colisaoBorda(astrosC);
+        colisaoBorda(astrosB);
+        colisaoBorda(astrosA);
 
         break;
 
     };
     requestAnimationFrame(logica);
 };
-
-setInterval(()=>{
-    document.location.reload(true);
-}, 10000);
-let tempo = 10;
-setInterval(() => {
-    tempo -= 1;
-    document.querySelector("#tempo").innerHTML = `Gerando novas posições em: ${tempo} segundos`;
-}, 1000)
 
 logica();

@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Simulação da gravidade</title>
-        <style>
-            div {
-                display: flex;
-                justify-content: center;
-            }
-            canvas {
-                image-rendering: pixelated;
-                width: 60%;
-            }
-        </style>
+        <title>Primeiro Exemplo</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h3>Simulação da gravidade</h3>
         <div>
             <section>
-                <p>Neste exemplo, temos uma representação da orbita de alguns planetas em um astro. Nenhum deles tem atração um pelo outro, apenas do sol, e o sol não é atraido por nenhum planeta.</p>
+                <h3>Simulação da gravidade</h3>
+                <p>Neste exemplo, podemos ver como a gravidade age entre dois astros.</p>
                 <p>O calculo da gravidade é tido pela seguinte formula:</p>
-                <p>Força gravitacional: <br> <blockquote> {(massa1 * massa2) ÷ (distancia * distancia)} * g (A constante g foi adaptada)</p>
+                <p>
+                    {(massa1 * massa2) ÷ (distancia * distancia)} * g (A constante g foi adaptada)
+                </p>
             </section>
             <canvas id="tela"></canvas>
         </div>
+        <footer>
+            <a href="#">Anterior</a>
+            <a href="exemplos/segundoExemplo.html">Próximo</a>
+        </footer>
         <script src="js/data.js"></script>
         <script src="js/gravidade.js"></script>
-        <script src="js/sistemaSolar.js"></script>
+        <script src="js/primeiroExemplo.js"></script>
     </body>
 </html>
