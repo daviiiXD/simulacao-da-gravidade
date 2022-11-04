@@ -13,7 +13,7 @@ function gravidade(astroA, astroB) {
     astroA.y += astroA.velocidadeY;
 
 };
-function distancia(astroA, astroB) {
+function pegarDistancia(astroA, astroB) {
     return distancia = Math.sqrt(
         Math.pow((astroA.x - astroB.x), 2) + Math.pow((astroA.y - astroB.y), 2)
     );

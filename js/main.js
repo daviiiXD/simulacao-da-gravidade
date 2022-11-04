@@ -1,17 +1,19 @@
 "use strict";
 
-tela.width = mundo.width + 1000;
-tela.height = mundo.height + 1000;
+tela.width = mundo.width;
+tela.height = mundo.height;
 
 function render() {
 
     // renderiza o fundo
+    ctx.globalAlpha = 0.5;
     ctx.fillStyle = mundo.background;
     ctx.fillRect(0, 0, mundo.width, mundo.height);
-
-    renderizar(astrosC);
+    
+    ctx.globalAlpha = 1;
     renderizar(astrosB);
     renderizar(astrosA);
+    renderizar(astrosC);
 
     requestAnimationFrame(render);
 };
@@ -22,16 +24,18 @@ function logica() {
         
         gravidade(astrosA, astrosB);
         gravidade(astrosA, astrosC);
-
+        
         gravidade(astrosB, astrosA);
         gravidade(astrosB, astrosC);
 
         gravidade(astrosC, astrosA);
         gravidade(astrosC, astrosB);
 
-        colisaoBorda(astrosC);
+        colisao(astrosA, astrosB);
+
         colisaoBorda(astrosB);
         colisaoBorda(astrosA);
+        colisaoBorda(astrosC);
 
         break;
 

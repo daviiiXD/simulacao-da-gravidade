@@ -6,16 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Simulação da gravidade</title>
         <link rel="stylesheet" href="/style.css">
+        <style>
+            canvas {
+                width: 40%;
+            }
+            section {
+                width: 40%;
+            }
+        </style>
     </head>
     <body>
         <h3>Simulação da gravidade</h3>
         <div>
             <section>
-                <p>Neste outro exemplo, temos um planeta com a massa negativa!</p>
+                <p>Neste outro exemplo, os planetas tem a massa negativa! se planetas normais são atraidos pela gravidade, os astros com massa negativa tendem a se afastar.
+                    porem ainda não foram encontrados corpos com massa negativa!
+                </p>
                 <p id="tempo"></p>
             </section>
             <canvas id="tela"></canvas>
         </div>
+        <footer>
+            <a href="segundoExemplo.html">Anterior</a>
+            <a href="playground.html">Próximo</a>
+        </footer>
         <script src="/js/data.js"></script>
         <script src="/js/gravidade.js"></script>
         <script src="/js/main.js"></script>

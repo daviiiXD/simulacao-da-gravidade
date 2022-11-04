@@ -6,9 +6,11 @@ tela.height = mundo.height;
 
 function render() {
     // renderiza o fundo
+    ctx.globalAlpha = 0.3;
     ctx.fillStyle = mundo.background;
     ctx.fillRect(0, 0, mundo.width, mundo.height);
 
+    ctx.globalAlpha = 1;
     renderizar(planetaA);
     renderizar(planetaB);
 
